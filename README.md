@@ -3,7 +3,6 @@
 > **Author:** Nishita Parija  
 > **Version:** 1.0.0  
 > **Language:** Python 3.8+  
-> **Licence:** MIT
 
 ---
 
