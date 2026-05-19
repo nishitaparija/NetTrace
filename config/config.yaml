@@ -1,0 +1,54 @@
+# NetTrace Configuration
+# Adjust thresholds to suit your environment's baseline traffic
+
+detection:
+  port_scan:
+    unique_ports_window_seconds: 5
+    unique_ports_threshold: 15          # ports/window to trigger alert
+    syn_only_weight: 1.5                # multiplier for half-open scans
+
+  beaconing:
+    min_connections: 8                  # minimum sessions before analysis
+    cv_high_threshold: 0.30             # CV below this = HIGH confidence
+    cv_medium_threshold: 0.50           # CV below this = MEDIUM confidence
+    min_interval_seconds: 5             # ignore very short intervals (<5s)
+
+  dns:
+    query_length_threshold: 52          # characters in subdomain
+    entropy_threshold: 3.5              # Shannon entropy threshold
+    query_rate_per_minute: 30           # queries/min to same domain
+    txt_record_internal_flag: true      # flag TXT queries from RFC1918 IPs
+
+  brute_force:
+    ssh_attempt_threshold: 5            # failed SSH in 60s window
+    http_401_threshold: 5               # 401 responses in 60s window
+    smb_fail_threshold: 5               # SMB auth failures in 60s window
+
+  icmp:
+    payload_size_threshold: 64          # bytes (ICMP data exceeding this)
+    frequency_threshold: 20             # ICMP packets/second
+
+  smb:
+    multi_host_threshold: 3             # unique SMB destinations = lateral movement
+
+  http:
+    large_post_threshold_kb: 512        # POST body size threshold
+    suspicious_user_agents:
+      - "sqlmap"
+      - "Nikto"
+      - "nmap"
+      - "python-requests/2"
+      - "curl/7"
+      - "Masscan"
+      - "zgrab"
+      - "Go-http-client/1.1"
+
+reporting:
+  html_theme: "dark"                    # dark | light
+  include_raw_packets: false            # include hex dump in report
+  max_findings_per_detector: 50        # cap per detector in report
+
+output:
+  default_format: "html"
+  report_directory: "reports"
+  timestamp_filenames: true
