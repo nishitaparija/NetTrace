@@ -271,5 +271,3 @@ A sliding 5-second window tracks unique destination ports per source IP. A sourc
 ## Author
 
 **Nishita Parija**  
-MSc Cybersecurity Risk Management (1st Class Honours), University of Galway  
-[LinkedIn](https://linkedin.com/in/nishitaparija) | [GitHub](https://github.com/nishitaparija)
